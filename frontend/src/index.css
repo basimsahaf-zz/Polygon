@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Ubuntu');
+body {
+  font-family: 'Lato', sans-serif;
+  color: white;
+}
+
+
+.main {
+  height: 100vh;
+}
+
+
+.container {
+  height: 100%;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.leftSideBar {
+  float: left;
+  width: 40%;
+  background: black;
+height: 100%;
+}
+
+.rightSideBar{
+  float: right;
+  width: 60%;
+  height: 100%;
+}
+
+
+.logo {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 500%;
+  padding: 10px;
+  margin-left: 95px;
+}
+
+.formFields {
+  margin-top: 15%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fieldNames {
+  color: white;
+  font-size: 15px;
+}
+
+.tagLine {
+  text-align: center;
+}
+.gps_ring {
+  border: 2px solid #999;
+  border-radius: 30px;
+  width: 40px;
+  margin-top: 3.7%;
+  margin-left: 80px;
+  position: absolute;
+  height: 40px;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0;
+}
+.gps_ring2 {
+  position: absolute;
+  border: 2px solid #999;
+  border-radius: 30px;
+  width: 8px;
+  height: 8px;
+  left: 4px;
+  top: 4px;
+  background: red;
+
+
+  -webkit-animation-iteration-count: infinite;
+  opacity: 1;
+}
+.gps_ring1 {
+  top: 8px;
+  left: 8px;
+  position: relative;
+  border: 2px solid #999;
+  border-radius: 30px;
+  width: 20px;
+  height: 20px;
+ -webkit-animation-delay: 12s;
+  animation-delay: 2s;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1,0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.2,1.2);
+    opacity: 0;
+  }
+}
+
+.location {
+  margin-top: 13%;
+  margin-left: 120px;
+  font-size: 220%;
+}
+
+.form-control {
+  height: 45px;
+}
+
+.btn-primary.active{
+  background-color: #c0392b;
+  border-color: #b23528;
+}
+
+.clickButton,
+.clickButton:after,
+.clickButton:active,
+.clickButton:focus{
+  background-color: #c0392b;
+  width: 70%;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: #b23528;
+  color: white;
+}
+
+.clickButton:hover{
+  background-color: #b23528;
+  border-color: #b23528;
+  color: white;
+}
