@@ -1,0 +1,40 @@
+{
+	"points": [
+		{
+			"point": {
+				"overall_score": 0.75,
+				"density_score": 0.25,
+				"school_score": 0.10,
+				"coordinate": {
+					"x": 5.0,
+					"y": 5.0,
+				},
+				"polygon": [
+					{"x": 0.0,  "y": 0.0},
+					{"x": 0.0,  "y": 10.0},
+					{"x": 10.0, "y": 10.0},
+					{"x": 10.0, "y": 0.0},
+				]
+
+			}
+		},
+		{
+			"point": {
+				"overall_score": 0.55,
+				"density_score": 0.75,
+				"school_score": 0.25,
+				"coordinate": {
+					"x": 5.0,
+					"y": 5.0,
+				},
+				"polygon": [
+					{"x": 10.0,  "y": 10.0},
+					{"x": 10.0,  "y": 20.0},
+					{"x": 20.0,  "y": 20.0},
+					{"x": 20.0,  "y": 10.0},
+				]
+			}
+		},
+	]
+}
+	
