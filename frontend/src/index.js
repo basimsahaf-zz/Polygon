@@ -3,14 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {Image,Navbar, Nav, NavItem, MenuItem, form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
 import ReactMapboxGl, {Geocoder,Type, Source, Layer, Feature } from "react-mapbox-gl";
-import {Polygon, withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import {Polygon, withScriptjs, withGoogleMap, GoogleMap, Marker, Map } from "react-google-maps"
 import Logo from './img/logo.png';
+import PolygonCoords from './strings';
 
-const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiYmFzaW1zYWhhZiIsImEiOiJjamE0bGNhdm43aThwMndwZ2N4Zmk0MnVtIn0.QxAL61I204c3tnV-xz4A4w"
-});
 
-var outerCoords = [
+var polygonPlot = [];
+
+function outerCoords(){
+  for(var i =0; i < PolygonCoords.length; i++){
+    var point = {lat: PolygonCoords[i][1], lng: PolygonCoords[i][0]};
+    polygonPlot.push(point);
+  }
+  console.log(polygonPlot)
+  return polygonPlot;
+}
+
+var meh = [
       {lat:51.160185, lng:  -114.227256}, // north west
       {lat:51.173012, lng: -113.912980}, // south west
       {lat:50.911104, lng: -113.905542}, // south east
@@ -19,18 +28,142 @@ var outerCoords = [
       {lat:51.093660, lng: -114.242133}  // north east
 ];
 
+
+
+
+var markers = [[51.1813062, -114.233482],[51.1813062, -114.2011228],
+[51.1813062, -114.1687636],
+[51.1813062, -114.1364044],
+[51.1813062, -114.1040452],
+[51.1813062, -114.071686],
+[51.1813062, -114.0393268],
+[51.1813062, -114.0069676],
+[51.1813062, -113.9746084],
+[51.1813062, -113.9422492],
+[51.2136654, -114.233482],
+[51.2136654, -114.2011228],
+[51.2136654, -114.1687636],
+[51.2136654, -114.1364044],
+[51.2136654, -114.1040452],
+[51.2136654, -114.071686],
+[51.2136654, -114.0393268],
+[51.2136654, -114.0069676],
+[51.2136654, -113.9746084],
+[51.2136654, -113.9422492],
+[51.2460246, -114.233482],
+[51.2460246, -114.2011228],
+[51.2460246, -114.1687636],
+[51.2460246, -114.1364044],
+[51.2460246, -114.1040452],
+[51.2460246, -114.071686],
+[51.2460246, -114.0393268],
+[51.2460246, -114.0069676],
+[51.2460246, -113.9746084],
+[51.2460246, -113.9422492],
+[51.2783838, -114.233482],
+[51.2783838, -114.2011228],
+[51.2783838, -114.1687636],
+[51.2783838, -114.1364044],
+[51.2783838, -114.1040452],
+[51.2783838, -114.071686],
+[51.2783838, -114.0393268],
+[51.2783838, -114.0069676],
+[51.2783838, -113.9746084],
+[51.2783838, -113.9422492],
+[51.310743, -114.233482],
+[51.310743, -114.2011228],
+[51.310743, -114.1687636],
+[51.310743, -114.1364044],
+[51.310743, -114.1040452],
+[51.310743, -114.071686],
+[51.310743, -114.0393268],
+[51.310743, -114.0069676],
+[51.310743, -113.9746084],
+[51.310743, -113.9422492],
+[51.3431022, -114.233482],
+[51.3431022, -114.2011228],
+[51.3431022, -114.1687636],
+[51.3431022, -114.1364044],
+[51.3431022, -114.1040452],
+[51.3431022, -114.071686],
+[51.3431022, -114.0393268],
+[51.3431022, -114.0069676],
+[51.3431022, -113.9746084],
+[51.3431022, -113.9422492],
+[51.3754614, -114.233482],
+[51.3754614, -114.2011228],
+[51.3754614, -114.1687636],
+[51.3754614, -114.1364044],
+[51.3754614, -114.1040452],
+[51.3754614, -114.071686],
+[51.3754614, -114.0393268],
+[51.3754614, -114.0069676],
+[51.3754614, -113.9746084],
+[51.3754614, -113.9422492],
+[51.4078206, -114.233482],
+[51.4078206, -114.2011228],
+[51.4078206, -114.1687636],
+[51.4078206, -114.1364044],
+[51.4078206, -114.1040452],
+[51.4078206, -114.071686],
+[51.4078206, -114.0393268],
+[51.4078206, -114.0069676],
+[51.4078206, -113.9746084],
+[51.4078206, -113.9422492],
+[51.4401798, -114.233482],
+[51.4401798, -114.2011228],
+[51.4401798, -114.1687636],
+[51.4401798, -114.1364044],
+[51.4401798, -114.1040452],
+[51.4401798, -114.071686],
+[51.4401798, -114.0393268],
+[51.4401798, -114.0069676],
+[51.4401798, -113.9746084],
+[51.4401798, -113.9422492],
+[51.472539, -114.233482],
+[51.472539, -114.2011228],
+[51.472539, -114.1687636],
+[51.472539, -114.1364044],
+[51.472539, -114.1040452],
+[51.472539, -114.071686],
+[51.472539, -114.0393268],
+[51.472539, -114.0069676],
+[51.472539, -113.9746084],
+[51.472539, -113.9422492]];
+
+
+class RenderMarkers extends React.Component {
+  constructor(props){
+    super(props);
+    outerCoords();
+    console.log(polygonPlot);
+    this.props = props;
+  }
+  render() {
+    return (
+      <div>
+      </div>
+    );
+  }
+}
+
+
+
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
     defaultZoom={10}
     defaultCenter={{ lat:51.065795, lng: -114.094700}}>
+    <RenderMarkers props/>
     <Polygon
-      paths={[outerCoords]}
-  />
-  <Polygon
-    paths={[outerCoords]}
-/>
-    {props.isMarkerShown && <Marker position={{ lat:51.065795, lng: -114.094700 }} />}
-    {props.isMarkerShown && <Marker position={{ lat:52.065795, lng: -112.094700 }} />}
+      options={{
+            strokeColor: '#e74c3c',
+            fillColor: '#e74c3c',
+            strokeOpacity: 0.28,
+            strokeWeight: 1,
+            fillOpacity: 0.5
+        }}
+      paths = {[polygonPlot]}
+     />
   </GoogleMap>
 ))
 
@@ -102,9 +235,9 @@ var onSelect = function() {
 
 
 class TwoSections extends React.Component {
-
-
-
+  findMarkers(){
+    outerCoords();
+  }
   render() {
     return (
       <div className="container">
@@ -147,9 +280,9 @@ class TwoSections extends React.Component {
         <MyMapComponent
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%`, width: `150vh`}} />}
-          containerElement={<div style={{ height: `100vh`, width: `150vh` }} />}
-          mapElement={<div style={{ height: `100%`, width: `150vh` }} />}
+          loadingElement={<div style={{ height: `100%`, width: `125vh`}} />}
+          containerElement={<div style={{ height: `100vh`, width: `125vh` }} />}
+          mapElement={<div style={{ height: `100%`, width: `125vh` }} />}
         />
         </div>
       </div>
