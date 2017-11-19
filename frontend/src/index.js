@@ -12,6 +12,54 @@ import PolygonJson from './data.json';
 
 var polygonPlot;
 var colors = ["#27ae60", '#e74c3c', '#f1c40f', '#8e44ad'];
+var factors = {
+  "setFactor1": {
+    "parks": 0.2,
+    "school": 0.2,
+    "food": 0.1,
+    "postSec": 0,
+    "transit": 0.3,
+    "recreation": 0.2
+  },
+  "setFactor2": {
+    "parks": 0.1,
+    "school": 0.3,
+    "food": 0.2,
+    "postSec": 0.1,
+    "transit": 0,
+    "recreation": 0.3
+  },
+  "setFactor3": {
+    "parks": 0.3,
+    "school": 0.1,
+    "food": 0,
+    "postSec": 0.3,
+    "transit": 0.1,
+    "recreation": 0.2
+  }
+}
+
+
+function decideColour(factorType, scoreJson) {
+  var scoreFactor = factorType.parks*scoreJson.parks +
+  factorType.school*scoreJson.school + factorType.food*scoreJson.food +
+  factorType.postSec*scoreJson.postSec + factorType.transit*scoreJson.transit +
+  factorType.recreation*scoreJson.recreation;
+
+  console.log(scoreFactor);
+
+  if(scoreFactor >=0 && scoreFactor < 0.20){
+    return "#a7ff0b";
+  } else if (scoreFactor >= 0.20 && scoreFactor < 0.40) {
+    return "#a8f51F";
+  } else if (scoreFactor >= 0.40 && scoreFactor < 0.60) {
+    return "#52bfd7";
+  } else if (scoreFactor >= 0.60 && scoreFactor < 0.80) {
+    return "#52a4f8";
+  } else if (scoreFactor >= 0.80 && scoreFactor <= 1) {
+    return "#d72a2a";
+  }
+}
 
 function outerCoords(){
   polygonPlot = PolygonCoords;
@@ -93,8 +141,8 @@ class RenderPolygons extends React.Component {
           <Polygon
             data-tip="Score: 10"
             options={{
-                  strokeColor: colors[Math.floor(Math.random()*colors.length)],
-                  fillColor: colors[Math.floor(Math.random()*colors.length)],
+                  strokeColor: decideColour(factors.setFactor2, item.score),
+                  fillColor: decideColour(factors.setFactor2, item.score),
                   strokeOpacity: 0.28,
                   strokeWeight: 1,
                   fillOpacity: 0.2
