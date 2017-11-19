@@ -47,6 +47,8 @@ def getScore(gridPoints_file, filenames, order_of_ds, polygon_file=None):
 
 	scores_out = []
 	for point, scores in zip(gridPoints, all_scores):
+		polygon = hex_from_point((float(point[0]), float(point[1])))
+
 		coordinate = {'lat': point[0], 'lng': point[1]}
 		score_json = {}
 		point = {'coordinate': coordinate}
@@ -54,10 +56,9 @@ def getScore(gridPoints_file, filenames, order_of_ds, polygon_file=None):
 			score_json[ds] = score
 		point['score'] = score_json
 
-		polygon = hex_from_point(float(point[0]), float(point[1]))
 		pgon = []
 		for p in polygon:
-			pgon.append({'coordinate': {'lat': p[0], 'lng': p[1]}})
+			pgon.append({'lat': p[0], 'lng': p[1]})
 		point['polygon'] = pgon
 		scores_out.append(point)
 
@@ -67,12 +68,12 @@ def getScore(gridPoints_file, filenames, order_of_ds, polygon_file=None):
 
 
 files = [
-		'../DATA_TO_USE/food_places.csv',
-		'../DATA_TO_USE/parks.csv',
-		'../DATA_TO_USE/post_secondary_schools.csv',
-		'../DATA_TO_USE/rec_facil.csv',
-		'../DATA_TO_USE/schools.csv',
-		'../DATA_TO_USE/transit_points.csv',
+		'../datasets/food_places.csv',
+		'../datasets/parks.csv',
+		'../datasets/post_secondary_schools.csv',
+		'../datasets/rec_facil.csv',
+		'../datasets/schools.csv',
+		'../datasets/transit_points.csv',
 
 ]
 ds_names = [
@@ -82,7 +83,6 @@ ds_names = [
 		'Recreation Score',
 		'School Score',
 		'Transit Score',
-
 ]
 
 
