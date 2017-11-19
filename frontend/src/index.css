@@ -32,9 +32,10 @@ height: 100%;
 
 .logo {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 500%;
-  padding: 10px;
-  margin-left: 95px;
+  width: 70%;
+  padding: 20px;
+  margin-left: 5%;
+  margin-right: auto;
 }
 
 .formFields {
@@ -56,8 +57,8 @@ height: 100%;
   border: 2px solid #999;
   border-radius: 30px;
   width: 40px;
-  margin-top: 3.7%;
-  margin-left: 80px;
+  margin-top: 0.3%;
+  margin-left: 120px;
   position: absolute;
   height: 40px;
   -webkit-animation: pulsate 1s ease-out;
@@ -108,9 +109,9 @@ height: 100%;
 }
 
 .location {
-  margin-top: 13%;
-  margin-left: 120px;
-  font-size: 220%;
+  margin-top: 2%;
+  margin-left: 160px;
+  font-size: 150%;
 }
 
 .form-control {
