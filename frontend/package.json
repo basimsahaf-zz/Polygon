@@ -10,7 +10,8 @@
     "react-dom": "^16.1.1",
     "react-google-maps": "^9.2.2",
     "react-mapbox-gl": "^2.8.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-tooltip": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

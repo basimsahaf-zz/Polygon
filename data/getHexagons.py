@@ -2,7 +2,7 @@ import numpy as np
 import json
 import os
 
-def hex_from_point(point, dist_horiz=0.0118347, dist_vert=0.00846393):
+def hex_from_point(point, dist_horiz=0.011050, dist_vert=0.00846393):
 	x, y = point
 	p1 = [x, 			y-dist_horiz]
 	p2 = [x+dist_vert, 	y-(dist_horiz/2)]
@@ -14,7 +14,7 @@ def hex_from_point(point, dist_horiz=0.0118347, dist_vert=0.00846393):
 
 
 def main(filename='caglary_grid_points.csv'):
-	out_str = ''
+	out_str = 'var polygons = ['
 	with open(filename) as f:
 		for line in f:
 			num_els = len(line.split(','))
@@ -26,8 +26,8 @@ def main(filename='caglary_grid_points.csv'):
 			for (_lat, _lon) in polygon:
 				polygon_str += '{'+'lat:'+str(_lat)+',lng:'+str(_lon)+'},'
 			out_str += polygon_str + '],\n'
-
-	file_save = 'calgary_hexagons.txt'
+	out_str += '];\n\nmodule.exports = polygons;'
+	file_save = '../frontend/src/strings.js'
 	with open(file_save, 'w') as f:
 		f.write(out_str)
 

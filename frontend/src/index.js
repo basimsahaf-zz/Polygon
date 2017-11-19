@@ -1,20 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {Image, form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
+import {Alert,Image, form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
 import {Polygon, withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
 import Logo from './img/logo.png';
 import PolygonCoords from './strings';
+import ReactTooltip from 'react-tooltip';
+import Bar from './img/bar.png'
 
 
-var polygonPlot = [];
+var polygonPlot;
+var colors = ["#27ae60", '#e74c3c', '#f1c40f', '#8e44ad'];
 
 function outerCoords(){
-  for(var i =0; i < PolygonCoords.length; i++){
-    var point = {lat: PolygonCoords[i][1], lng: PolygonCoords[i][0]};
-    polygonPlot.push(point);
-  }
-  console.log(polygonPlot)
+  polygonPlot = PolygonCoords;
+
+  // for(var i =0; i < PolygonCoords.length; i++){
+  //   var polygon = []
+  //   for(var j = 0; j < PolygonCoords[i].length; j++){
+  //     var point = {lat: PolygonCoords[i][j][0], lng: PolygonCoords[i][j][1]};
+  //     polygon.push(point);
+  //   }
+  //   polygonPlot.push(polygon);
+  // }
+  // console.log(polygonPlot)
   return polygonPlot;
 }
 
@@ -34,6 +43,70 @@ class RenderMarkers extends React.Component {
   }
 }
 
+function onHexagonClick() {
+  console.log("Hexagon clicked");
+};
+
+// const AlertDismissable = React.createClass({
+//   getInitialState() {
+//     return {
+//       alertVisible: true,
+//     };
+//   },
+//
+//   render() {
+//     if (this.state.alertVisible) {
+//       return (
+//         <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
+//           <h4>Oh snap! You got an error!</h4>
+//           <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+//           <p>
+//             <Button bsStyle="danger">Take this action</Button>
+//             <span> or </span>
+//             <Button onClick={this.handleAlertDismiss}>Hide Alert</Button>
+//           </p>
+//         </Alert>
+//       );
+//     }
+//
+//     return (
+//       <Button onClick={this.handleAlertShow}>Show Alert</Button>
+//     );
+//   },
+//
+//   handleAlertDismiss() {
+//     this.setState({ alertVisible: false });
+//   },
+//
+//   handleAlertShow() {
+//     this.setState({ alertVisible: true });
+//   },
+// });
+
+
+class RenderPolygons extends React.Component {
+  render(){
+    return (
+      <div>
+        {polygonPlot.map((item, index) => (
+          <Polygon
+            data-tip="Score: 10"
+            options={{
+                  strokeColor: colors[Math.floor(Math.random()*colors.length)],
+                  fillColor: colors[Math.floor(Math.random()*colors.length)],
+                  strokeOpacity: 0.28,
+                  strokeWeight: 1,
+                  fillOpacity: 0.2
+              }}
+            paths = {[item]}
+           />
+        ))}
+        <ReactTooltip />
+      </div>
+    );
+  }
+}
+
 
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
@@ -41,16 +114,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultZoom={10}
     defaultCenter={{ lat:51.065795, lng: -114.094700}}>
     <RenderMarkers props/>
-    <Polygon
-      options={{
-            strokeColor: '#e74c3c',
-            fillColor: '#e74c3c',
-            strokeOpacity: 0.28,
-            strokeWeight: 1,
-            fillOpacity: 0.5
-        }}
-      paths = {[polygonPlot]}
-     />
+    <RenderPolygons/>
   </GoogleMap>
 ))
 
