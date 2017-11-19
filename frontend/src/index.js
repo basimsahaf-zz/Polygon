@@ -176,8 +176,8 @@ class RenderPolygons extends React.Component {
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
-    defaultZoom={10}
-    defaultCenter={{ lat:51.065795, lng: -114.094700}}>
+    defaultZoom={14}
+    defaultCenter={{ lat:51.044886, lng: -114.067889}}>
     <RenderMarkers props/>
     <RenderPolygons/>
   </GoogleMap>
