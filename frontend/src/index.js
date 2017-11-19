@@ -8,6 +8,7 @@ import PolygonCoords from './strings';
 import ReactTooltip from 'react-tooltip';
 import Bar from './img/bar.png'
 import PolygonJson from './data.json';
+import $ from 'jquery';
 
 
 var polygonPlot;
@@ -39,25 +40,40 @@ var factors = {
   }
 }
 
+var businessType = "";
 
-function decideColour(factorType, scoreJson) {
+
+function decideColour(business, scoreJson) {
+
+  var factorType;
+
+  if(business == "coffee"){
+    factorType = factors.setFactor1;
+  } else if(business == "retail") {
+    factorType = factors.setFactor2;
+  } else {
+    factorType = factors.setFactor3;
+  }
+
+  console.log(factorType);
+
   var scoreFactor = factorType.parks*scoreJson.parks +
   factorType.school*scoreJson.school + factorType.food*scoreJson.food +
   factorType.postSec*scoreJson.postSec + factorType.transit*scoreJson.transit +
   factorType.recreation*scoreJson.recreation;
 
-  console.log(scoreFactor);
-
   if(scoreFactor >=0 && scoreFactor < 0.20){
     return "#a7ff0b";
-  } else if (scoreFactor >= 0.20 && scoreFactor < 0.40) {
+  } else if (scoreFactor >= 2 && scoreFactor < 4) {
     return "#a8f51F";
-  } else if (scoreFactor >= 0.40 && scoreFactor < 0.60) {
+  } else if (scoreFactor >= 4 && scoreFactor < 6) {
     return "#52bfd7";
-  } else if (scoreFactor >= 0.60 && scoreFactor < 0.80) {
+  } else if (scoreFactor >= 6 && scoreFactor < 8) {
     return "#52a4f8";
-  } else if (scoreFactor >= 0.80 && scoreFactor <= 1) {
+  } else if (scoreFactor >= 8 && scoreFactor <= 10) {
     return "#d72a2a";
+  } else if (scoreFactor > 10) {
+    return "#911b1b";
   }
 }
 
@@ -141,11 +157,11 @@ class RenderPolygons extends React.Component {
           <Polygon
             data-tip="Score: 10"
             options={{
-                  strokeColor: decideColour(factors.setFactor2, item.score),
-                  fillColor: decideColour(factors.setFactor2, item.score),
+                  strokeColor: decideColour(businessType, item.score),
+                  fillColor: decideColour(businessType, item.score),
                   strokeOpacity: 0.28,
                   strokeWeight: 1,
-                  fillOpacity: 0.2
+                  fillOpacity: 0.5
               }}
             paths = {[item.polygon]}
            />
@@ -167,11 +183,25 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   </GoogleMap>
 ))
 
+function onButtonPress() {
+  $(".rightSideBar").css("visibility", "visible");
+}
+
 
 class TwoSections extends React.Component {
-  findMarkers(){
-    outerCoords();
+  constructor() {
+    super();
+    this.handleChange;
+    this.handleSubmit;
+    this.forceUpdateHandler.bind(this);
   }
+  handleChange(event){
+    businessType = event.target.value;
+    console.log(businessType);
+  }
+  forceUpdateHandler(){
+   this.forceUpdate();
+ }
   render() {
     return (
       <div className="container">
@@ -191,12 +221,11 @@ class TwoSections extends React.Component {
             </FormGroup>
             <FormGroup controlId="formControlsSelect">
         <ControlLabel>Businesss Type</ControlLabel>
-        <FormControl componentClass="select" placeholder="Select">
-          <option value="none"></option>
+        <FormControl componentClass="select" defaultValue= {businessType} placeholder="Select" onChange={this.handleChange}>
+          <option value="none">{businessType}</option>
           <option value="coffee">Coffee Shop</option>
           <option value="retail">Retail Store</option>
           <option value="restaurant">Restaurant</option>
-          <option value="other">...</option>
         </FormControl>
       </FormGroup>
       <h3 className="fieldNames">Enter Monthy Rental Budget($)</h3>
@@ -208,7 +237,7 @@ class TwoSections extends React.Component {
             <FormControl type="text" placeholder="Eg downtown, park etc." />
           </FormGroup>
           </form>
-          <Button className="clickButton" bsSize="large" block>Predict</Button>
+          <Button className="clickButton" bsSize="large" onClick={onButtonPress} block>Predict</Button>
         </div>
         <div className="rightSideBar">
         <MyMapComponent

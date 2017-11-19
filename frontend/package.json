@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@mapbox/react-geocoder": "^2.5.0",
+    "jquery": "^3.2.1",
     "mapbox-gl": "^0.42.1",
     "react": "^16.1.1",
     "react-bootstrap": "^0.31.5",

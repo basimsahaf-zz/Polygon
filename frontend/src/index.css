@@ -27,6 +27,7 @@ height: 100%;
   float: right;
   width: 60%;
   height: 100%;
+  visibility: hidden;
 }
 
 
