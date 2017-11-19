@@ -7,6 +7,7 @@ import Logo from './img/logo.png';
 import PolygonCoords from './strings';
 import ReactTooltip from 'react-tooltip';
 import Bar from './img/bar.png'
+import PolygonJson from './data.json';
 
 
 var polygonPlot;
@@ -88,7 +89,7 @@ class RenderPolygons extends React.Component {
   render(){
     return (
       <div>
-        {polygonPlot.map((item, index) => (
+        {PolygonJson.points.map((item, index) => (
           <Polygon
             data-tip="Score: 10"
             options={{
@@ -98,7 +99,7 @@ class RenderPolygons extends React.Component {
                   strokeWeight: 1,
                   fillOpacity: 0.2
               }}
-            paths = {[item]}
+            paths = {[item.polygon]}
            />
         ))}
         <ReactTooltip />
