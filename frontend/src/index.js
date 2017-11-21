@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {Alert,Image, form, FormGroup, FormControl,ControlLabel, Button} from 'react-bootstrap';
-import {Polygon, withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
+import {Polygon, withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps"
 import Logo from './img/logo.png';
 import PolygonCoords from './strings';
 import ReactTooltip from 'react-tooltip';
@@ -62,18 +62,30 @@ function decideColour(business, scoreJson) {
   factorType.postSec*scoreJson.postSec + factorType.transit*scoreJson.transit +
   factorType.recreation*scoreJson.recreation;
 
-  if(scoreFactor >=0 && scoreFactor < 0.20){
+  if(scoreFactor >= 3.5 && scoreFactor < 4.0){
     return "#a7ff0b";
-  } else if (scoreFactor >= 2 && scoreFactor < 4) {
+  } else if (scoreFactor >= 4 && scoreFactor < 4.5) {
     return "#a8f51F";
-  } else if (scoreFactor >= 4 && scoreFactor < 6) {
+  } else if (scoreFactor >= 4.5 && scoreFactor < 5.0) {
     return "#52bfd7";
-  } else if (scoreFactor >= 6 && scoreFactor < 8) {
+  } else if (scoreFactor >= 5.0 && scoreFactor < 5.5) {
     return "#52a4f8";
-  } else if (scoreFactor >= 8 && scoreFactor <= 10) {
+  } else if (scoreFactor >= 5.5 && scoreFactor < 6.0) {
     return "#d72a2a";
-  } else if (scoreFactor > 10) {
+  } else if (scoreFactor >= 6 && scoreFactor < 6.5) {
+    return "#e11168";
+  } else if (scoreFactor >= 6.5 && scoreFactor < 7) {
     return "#911b1b";
+  } else if (scoreFactor >= 7 && scoreFactor < 7.2) {
+    return "#520626";
+  } else if (scoreFactor >=7.2 && scoreFactor < 7.4) {
+    return "#270012";
+  } else if (scoreFactor >=7.4 && scoreFactor < 7.6) {
+    return "#16000a";
+  } else if (scoreFactor >=7.6 && scoreFactor < 7.8) {
+    return "#000";
+  } else {
+    return "#ff1682"
   }
 }
 
@@ -180,6 +192,18 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultCenter={{ lat:51.044886, lng: -114.067889}}>
     <RenderMarkers props/>
     <RenderPolygons/>
+    <Marker
+      name={'High Range'}
+      position={{lat: 51.044946, lng: -114.079851}} />
+    <Marker />
+    <Marker
+      name={'Mid Range'}
+      position={{lat: 51.053397, lng: -114.048147}} />
+    <Marker />
+    <Marker
+      name={'Low Range'}
+      position={{lat: 51.051520, lng: -114.093168}} />
+    <Marker />
   </GoogleMap>
 ))
 
